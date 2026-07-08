@@ -8,6 +8,7 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -27,6 +28,8 @@ const Signup = () => {
   };
 
   const navigate = useNavigate()
+  const {loading} = useSelector(store=>store.auth)
+  const dispatch = useDispatch()
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -40,6 +43,7 @@ const Signup = () => {
         formData.append("file", input.file)
     }
     try {
+        dispatch(setLoading(true))
         const res = await axios.post(`${USER_API_END_POINT}/register`, formData,{
             headers:{
                 "Content-Type":"multipart/form-data"
@@ -53,6 +57,8 @@ const Signup = () => {
     } catch (error) {
         console.log(error);
         toast.error(error.response?.data?.message || "An error occurred");
+    }finally{
+      dispatch(setLoading(false))
     }
   };
 
@@ -142,9 +148,12 @@ const Signup = () => {
               />
             </div>
           </div>
-          <Button type="submit" className="w-full my-4">
-            Signup
+          {
+            loading ? <Button className='w-full my-4'><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait </Button> :<Button type="submit" className="w-full my-4">
+            signup
           </Button>
+          }
+          
           <span className="text-sm">
             Already have an account?{" "}
             <Link to="/login" className="text-blue-600">
