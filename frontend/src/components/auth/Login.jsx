@@ -32,7 +32,7 @@ const Login = () => {
         withCredentials: true,
       });
       if (res.data.success) {
-        dispatch(setUsers(res.data.user));
+        dispatch(setUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);
       }
