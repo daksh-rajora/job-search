@@ -81,28 +81,14 @@ const Login = () => {
             />
           </div>
           <div className="flex items-center justify-between">
-            <RadioGroup className="flex items-center gap-4 my-5">
+            <RadioGroup value={input.role} onValueChange={(value) => setInput({ ...input, role: value })} className="flex items-center gap-4 my-5">
               <div className="flex items-center space-x-2">
-                <Input
-                  type="radio"
-                  name="role"
-                  value="student"
-                  checked={input.role === "student"}
-                  onChange={changeEventHandler}
-                  className="cursor-pointer   "
-                />
+                <RadioGroupItem value="student" id="r1" />
                 <Label htmlFor="r1">Student</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <Input
-                  type="radio"
-                  name="role"
-                  checked={input.role === "recruiter"}
-                  onChange={changeEventHandler}
-                  value="recruiter"
-                  className="cursor-pointer   "
-                />
-                <Label htmlFor="r1">Recruiter</Label>
+                <RadioGroupItem value="recruiter" id="r2" />
+                <Label htmlFor="r2">Recruiter</Label>
               </div>
             </RadioGroup>
           </div>
