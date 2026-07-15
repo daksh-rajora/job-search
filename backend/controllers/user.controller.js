@@ -1,6 +1,8 @@
 import {User} from '../models/user.model.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import getDataUri from '../utils/datauri.js';
+import cloudinary from '../utils/cloudinary.js';
 
 export const register = async (req,res) => {
     try {
@@ -10,6 +12,14 @@ export const register = async (req,res) => {
                 message: "All fields are required",
                 success: false
             })
+        }
+        const file = req.file;
+        let cloudResponse;
+        if (file) {
+            const fileUri = getDataUri(file);
+            cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+                resource_type: "auto"
+            });
         }
         const user = await User.findOne({email});
         if (user){
@@ -24,7 +34,10 @@ export const register = async (req,res) => {
             email,
             phoneNumber,
             password: hashedPassword,
-            role
+            role,
+            profile: {
+                profilePhoto: cloudResponse ? cloudResponse.secure_url : ""
+            }
         });
         return res.status(201).json({
             message:"Account created successfully",
@@ -118,8 +131,14 @@ export const updateProfile = async (req,res) =>{
     try {
         const {fullname, email, phoneNumber, bio, skills} = req.body;
         
-        
-        //cloudinary ayega idhr
+        const file = req.file;
+        let cloudResponse;
+        if (file) {
+            const fileUri = getDataUri(file);
+            cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+                resource_type: "auto"
+            });
+        }
 
         let skillsArray;
         if (skills){
@@ -143,7 +162,11 @@ export const updateProfile = async (req,res) =>{
         if (skills) user.profile.skills = skillsArray;
         if (bio) user.profile.bio = bio;
 
-        //resume ayega baad me jb cloudinary set kr lenge
+        //resume ayega
+        if(cloudResponse){
+            user.profile.resume = cloudResponse.secure_url;//saving in cloudinary
+            user.profile.resumeOriginalName = file.originalname;//saving original name of resume
+        }
 
         await user.save()
 
