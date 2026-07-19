@@ -5,15 +5,20 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { useNavigate } from "react-router-dom";
 
-const Job = (job) => {
+const Job = ({ job }) => {
 
   const navigate = useNavigate()
-  const jobId = "dfklsdjfsd";
+  const daysAgoFunction = (mongodbTime) => {
+    const createdAt = new Date(mongodbTime);
+    const currentTime = new Date();
+    const timeDifference = currentTime - createdAt;
+    return Math.floor(timeDifference / (24*60*60*1000))
+  }
 
   return (
     <div className="p-5 rounded-md shadow-xl bg-white border border-gray-100">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500">2 days ago</p>
+        <p className="text-sm text-gray-500">{daysAgoFunction(job?.createdAt) == 0 ? "Today" : `${daysAgoFunction(job?.createdAt)} days Ago`}</p>
         <Button variant="outline" className="rounded-full" size="icon">
           <BookmarkIcon />
         </Button>
@@ -42,7 +47,7 @@ const Job = (job) => {
         <Badge className="text-[#7209b7] font-bold" variant="ghost">{job?.salary}</Badge>
       </div>
       <div className="flex items-center gap-4 mt-4">
-        <Button onClick={()=>navigate('/description/${job?._id}')} variant="outline">Details</Button>
+        <Button onClick={()=>navigate(`/description/${job?._id}`)} variant="outline">Details</Button>
         <Button className="bg-[#7209b7]">Save For Later</Button>
       </div>
     </div>
