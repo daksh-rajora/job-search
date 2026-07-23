@@ -15,8 +15,12 @@ const CompanyCreate = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [companyName, setCompanyName] = useState()
+    const [companyName, setCompanyName] = useState("");
     const registerNewCompany = async () =>{
+        if (!companyName || !companyName.trim()) {
+            toast.error("Company name is required");
+            return;
+        }
         try {
             const res = await axios.post(`${COMPANY_API_END_POINT}/register`,{companyName},{
                 headers:{
@@ -32,13 +36,14 @@ const CompanyCreate = () => {
             }
         } catch (error) {
             console.log(error)
+            toast.error(error.response?.data?.message || "Failed to register company")
         }
     }
 
   return (
     <div>
       <Navbar/>
-      <div className='max-w-4xl mx-auto'>
+      <div className='max-w-4xl mx-auto px-4'>
         <div className='my-10'>
             <h1 className='font-bold text-2xl'>Your Company Name</h1>
             <p className='text-gray-500'>What would you like to give your company Name? You can change this later...</p>
