@@ -8,7 +8,7 @@ const companySlice = createSlice({
     reducers:{
         //actions
 
-        setSingleJob:(state,action)=>{
+        setSingleCompany:(state,action)=>{
             state.singleCompany = action.payload
         }
     }
