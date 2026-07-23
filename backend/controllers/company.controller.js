@@ -27,6 +27,10 @@ export const registerCompany = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: "Internal server error",
+            success: false
+        });
     }
 }
 
@@ -46,6 +50,10 @@ export const getCompany = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: "Internal server error",
+            success: false
+        });
     }
 }
 
@@ -64,7 +72,11 @@ export const getCompanyById = async (req, res) => {
             success: true
         })
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        return res.status(500).json({
+            message: "Internal server error",
+            success: false
+        });
     }
 }
 
@@ -78,7 +90,7 @@ export const updateCompany = async (req, res) => {
 
         const company = await Company.findByIdAndUpdate(req.params.id, updatedData, { new: true });
         if (!company) {
-             return res.status(404).json({
+            return res.status(404).json({
                 message: "Company not found",
                 success: false
             })
@@ -89,7 +101,11 @@ export const updateCompany = async (req, res) => {
             success: true
         })
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        return res.status(500).json({
+            message: "Internal server error",
+            success: false
+        });
     }
 }
 //1:56 se
