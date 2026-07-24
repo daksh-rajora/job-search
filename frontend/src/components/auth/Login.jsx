@@ -33,7 +33,11 @@ const Login = () => {
       });
       if (res.data.success) {
         dispatch(setUser(res.data.user));
-        navigate("/");
+        if (res.data.user.role === "recruiter") {
+          navigate("/admin/companies");
+        } else {
+          navigate("/");
+        }
         toast.success(res.data.message);
       }
     } catch (error) {
