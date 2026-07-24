@@ -34,7 +34,7 @@ const Navbar = () => {
     <div className="bg-white">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-4">
         <div>
-          <Link to="/">
+          <Link to={user && user.role === "recruiter" ? "/admin/companies" : "/"}>
             <h1 className="text-2xl font-bold">
               Job <span className="text-[#F83002]">Portal</span>
             </h1>
