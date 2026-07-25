@@ -19,19 +19,19 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = ({ filterText }) => {
-  const { companies } = useSelector((store) => store.company);
+  const { companies,searchCompanyByText } = useSelector((store) => store.company);
   const [filterCompany, setFilterCompany] = useState(companies);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const filteredCompany = companies.length > 0 ? companies.filter((company) => {
-      if (!filterText) {
+    const filteredCompany = companies.length >= 0 ? companies.filter((company) => {
+      if (!searchCompanyByText) {
         return true;
       }
-      return company?.name?.toLowerCase().includes(filterText.toLowerCase());
+      return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase());
     }) : [];
     setFilterCompany(filteredCompany);
-  }, [companies, filterText]);
+  }, [companies, searchCompanyByText]);
 
   return (
     <div>
