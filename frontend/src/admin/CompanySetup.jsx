@@ -65,11 +65,12 @@ const CompanySetup = () => {
       })
       if(res.data.success){
         toast.success(res.data.message)
+        dispatch(setSingleCompany(res.data.company))
         navigate('/admin/companies')
       }
     } catch (error) {
       console.log(error)
-      toast.error(error.response.data.message)
+      toast.error(error.response?.data?.message || "Failed to update company")
     }finally{
       setLoading(false)
     }
