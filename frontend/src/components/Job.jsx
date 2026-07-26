@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { BookmarkIcon } from "lucide-react";
-import { Avatar, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { useNavigate } from "react-router-dom";
 
@@ -25,11 +24,15 @@ const Job = ({ job }) => {
       </div>
 
       <div className="flex items-center gap-2 my-2">
-        <Button className="p-6" variant="outline" size="icon">
-          <Avatar>
-            <AvatarImage src="https://media.wired.com/photos/5926ffe47034dc5f91bed4e8/3:2/w_2560%2Cc_limit/google-logo.jpg" />
-          </Avatar>
-        </Button>
+        <div className="w-12 h-12 flex items-center justify-center border border-gray-200 rounded-md p-1 bg-white">
+          {job?.company?.logo ? (
+            <img src={job?.company?.logo} alt={`${job?.company?.name} logo`} className="max-w-full max-h-full object-contain" />
+          ) : (
+            <span className="font-bold text-lg text-gray-700">
+              {job?.company?.name?.charAt(0).toUpperCase()}
+            </span>
+          )}
+        </div>
         <div>
           <h1 className="font-medium text-lg">{job?.company?.name}</h1>
           <h1 className="text-sm text-gray-500">India</h1>
