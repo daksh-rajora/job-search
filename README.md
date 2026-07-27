@@ -50,7 +50,6 @@
 
 ## Screenshots
 
-> Add screenshots to `docs/screenshots/` and update the table below.
 
 | Page | Screenshot |
 |---|---|
