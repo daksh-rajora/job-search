@@ -29,16 +29,16 @@ const HeroSection = () => {
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati
           fugit error illum corporis atque!
         </p>
-        <div className="flex w-full sm:w-[70%] md:w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto">
+        <div className="flex w-full sm:w-[80%] md:w-[45%] shadow-lg border border-gray-200 pl-5 pr-1.5 py-1.5 rounded-full items-center justify-between mx-auto bg-white focus-within:ring-2 focus-within:ring-[#6A38C2]/20 transition-all">
           <input
             type="text"
-            placeholder="Find your dream jobs"
-            className="outline-none border-none w-full py-2 text-sm md:text-base"
+            placeholder="Find your dream jobs..."
+            className="outline-none border-none w-full py-1 text-sm md:text-base text-gray-800 placeholder:text-gray-400 bg-transparent"
             onChange={(e) => setQuery(e.target.value)}
           />
           <Button
             onClick={searchJobHandler}
-            className="rounded-r-full bg-[#6A38C2] hover:bg-[#582fa1] py-2"
+            className="bg-[#6A38C2] hover:bg-[#582fa1] w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center text-white shrink-0 p-0 shadow-sm transition-transform active:scale-95"
           >
             <Search className="h-5 w-5" />
           </Button>
