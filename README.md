@@ -44,7 +44,7 @@
 |---|---|
 | Frontend (Local Dev) | `http://localhost:5173` |
 | Backend API (Local Dev) | `http://localhost:4000/api/v1` |
-| Live Demo | _Not yet deployed — add your URL here_ |
+| Live Demo | [https://job-portal-blue-rho.vercel.app](https://job-portal-blue-rho.vercel.app/) |
 
 ---
 
