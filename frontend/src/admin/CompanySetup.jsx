@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import useGetCompanyById from "@/hooks/useGetCompanyById";
+import { setSingleCompany } from "@/redux/companySlice";
 
 const CompanySetup = () => {
   const params = useParams();
@@ -102,7 +103,7 @@ const CompanySetup = () => {
             </Button>
             <h1 className="font-bold text-xl">Company Setup</h1>
           </div>
-          <div className="grid grid-cols-2 gap-5 my-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-2">
             <div >
               <Label className='mb-2'>Company Name</Label>
               <Input
