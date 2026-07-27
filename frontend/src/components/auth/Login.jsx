@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -20,7 +20,18 @@ const Login = () => {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading } = useSelector((store) => store.auth);
+  const { loading, user } = useSelector((store) => store.auth);
+
+  useEffect(() => {
+    if (user) {
+      if (user.role === 'recruiter') {
+        navigate('/admin/companies');
+      } else {
+        navigate('/');
+      }
+    }
+  }, [user, navigate]);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -48,6 +59,12 @@ const Login = () => {
     }
   };
 
+  useEffect(()=>{
+    if(user){
+      navigate("/")
+    }
+  })
+
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -57,10 +74,10 @@ const Login = () => {
       <div>
         <Navbar />
       </div>
-      <div className="flex my-23 items-center justify-center max-w-4xl  mx-auto">
+      <div className="flex items-center justify-center min-h-[calc(100vh-64px)] px-4 py-8">
         <form
           onSubmit={submitHandler}
-          className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
+          className="w-full max-w-sm border border-gray-200 rounded-xl p-6 shadow-sm bg-white"
         >
           <h1 className="font-bold text-xl mb-5">Login</h1>
 
