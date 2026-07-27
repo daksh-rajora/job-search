@@ -424,14 +424,6 @@ MIT License © 2024 Daksh Rajora
 
 ---
 
-## Author
-
-| Field | Details |
-|---|---|
-| **Name** | Daksh Rajora |
-| **GitHub** | [@daksh-rajora](https://github.com/daksh-rajora) |
-| **Email** | dakshrajora11@gmail.com |
-| **LinkedIn** | [linkedin.com/in/dakshrajora](https://www.linkedin.com/in/dakshrajora) |
 
 ---
 
