@@ -279,8 +279,13 @@ API_KEY=your_cloudinary_api_key
 API_SECRET=your_cloudinary_api_secret
 ```
 
-> **Note:** Frontend API base URLs are hardcoded in `frontend/src/utils/constant.js`.  
-> Update them to your deployed backend URL before going to production.
+### `frontend/.env` (or Vercel Environment Variables)
+
+```env
+VITE_BASE_URL=https://your-backend-service.onrender.com
+```
+
+> **Note:** Set `VITE_BASE_URL` in Vercel settings to your deployed backend URL. In local development, set it to `http://localhost:4000`.
 
 ---
 
