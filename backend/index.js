@@ -18,13 +18,15 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 const allowedOrigins = [
     "http://localhost:5173",
-    process.env.FRONTEND_URL
-];
+    process.env.FRONTEND_URL,
+    process.env.FRONTEND_URL?.replace(/\/$/, ""),
+    "https://job-portal-blue-rho.vercel.app"
+].filter(Boolean);
 
 app.use(
     cors({
         origin: function (origin, callback) {
-            if (!origin || allowedOrigins.includes(origin)) {
+            if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes(origin.replace(/\/$/, ""))) {
                 callback(null, true);
             } else {
                 callback(new Error("Not allowed by CORS"));
