@@ -19,8 +19,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = ({ filterText }) => {
-  const { companies,searchCompanyByText } = useSelector((store) => store.company);
-  const [filterCompany, setFilterCompany] = useState(companies);
+  const { companies = [], searchCompanyByText = "" } = useSelector((store) => store.company) || {};
+  const [filterCompany, setFilterCompany] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const CompaniesTable = ({ filterText }) => {
   }, [companies, searchCompanyByText]);
 
   return (
-    <div>
+    <div className="overflow-x-auto">
       <Table>
         <TableCaption>A list of your recent registered companies</TableCaption>
         <TableHeader>
