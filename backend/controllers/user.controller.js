@@ -130,14 +130,28 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req,res) =>{
     try {
         const {fullname, email, phoneNumber, bio, skills} = req.body;
+        console.log("updateProfile body:", {fullname, email, phoneNumber, bio, skills});
+        console.log("updateProfile files:", req.files);
         
-        const file = req.file;
+        const file = req.files?.['file']?.[0];
+        const profilePhoto = req.files?.['profilePhoto']?.[0];
+
         let cloudResponse;
         if (file) {
             const fileUri = getDataUri(file);
             cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
                 resource_type: "auto"
             });
+            console.log("Resume uploaded to Cloudinary:", cloudResponse.secure_url);
+        }
+
+        let profilePhotoCloudResponse;
+        if (profilePhoto) {
+            const fileUri = getDataUri(profilePhoto);
+            profilePhotoCloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+                resource_type: "auto"
+            });
+            console.log("Profile Photo uploaded to Cloudinary:", profilePhotoCloudResponse.secure_url);
         }
 
         let skillsArray;
@@ -166,6 +180,11 @@ export const updateProfile = async (req,res) =>{
         if(cloudResponse){
             user.profile.resume = cloudResponse.secure_url;//saving in cloudinary
             user.profile.resumeOriginalName = file.originalname;//saving original name of resume
+        }
+
+        //profilePhoto ayega
+        if(profilePhotoCloudResponse){
+            user.profile.profilePhoto = profilePhotoCloudResponse.secure_url;
         }
 
         await user.save()
