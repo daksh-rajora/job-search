@@ -38,7 +38,7 @@ const PostJob = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const { companies } = useSelector((store) => store.company);
+  const { companies = [] } = useSelector((store) => store.company) || {};
 
   const changeEventHandler = (e) => {
     setInput({
@@ -78,9 +78,10 @@ const PostJob = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex items-center justify-center w-full my-5">
-        <form onSubmit={submitHandler} className="p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md">
-          <div className="grid grid-cols-2 gap-2">
+      <div className="flex items-center justify-center w-full my-5 px-4">
+        <form onSubmit={submitHandler} className="p-6 w-full max-w-2xl border border-gray-200 shadow-lg rounded-xl bg-white">
+          <h2 className="text-xl font-bold mb-4">Post New Job</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <Label>Title</Label>
               <Input
