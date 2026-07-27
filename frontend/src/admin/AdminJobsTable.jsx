@@ -19,8 +19,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const AdminJobsTable = () => {
-  const { allAdminJobs, searchJobByText } = useSelector((store) => store.job);
-  const [filterJobs, setFilterJobs] = useState(allAdminJobs);
+  const { allAdminJobs = [], searchJobByText = "" } = useSelector((store) => store.job) || {};
+  const [filterJobs, setFilterJobs] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const AdminJobsTable = () => {
   }, [allAdminJobs, searchJobByText]);
 
   return (
-    <div>
+    <div className="overflow-x-auto">
       <Table>
         <TableCaption>A list of your recent posted Jobs</TableCaption>
         <TableHeader>
