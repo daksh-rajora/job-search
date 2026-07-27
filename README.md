@@ -1,4 +1,4 @@
-# ?? Job Portal — Full-Stack MERN Application
+# ?? Job Portal ï¿½ Full-Stack MERN Application
 
 <div align="center">
 
@@ -11,7 +11,7 @@
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-Media-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
 
-**A modern, full-stack job portal connecting job seekers with recruiters — built on the MERN stack with role-based authentication, cloud media, and a fully responsive UI.**
+**A modern, full-stack job portal connecting job seekers with recruiters ï¿½ built on the MERN stack with role-based authentication, cloud media, and a fully responsive UI.**
 
 </div>
 
@@ -44,7 +44,7 @@
 |---|---|
 | ??? Frontend (Local Dev) | `http://localhost:5173` |
 | ?? Backend API (Local Dev) | `http://localhost:4000/api/v1` |
-| ?? Live Demo | _Not yet deployed — add your URL here_ |
+| ?? Live Demo | _Not yet deployed ï¿½ add your URL here_ |
 
 ---
 
@@ -52,14 +52,15 @@
 
 > Add screenshots to `docs/screenshots/` and embed them here.
 
+## ðŸ“¸ Screenshots
+
 | Page | Screenshot |
 |---|---|
-| Home Page | _(Add screenshot)_ |
-| Job Listings | _(Add screenshot)_ |
-| Job Description | _(Add screenshot)_ |
-| Student Profile | _(Add screenshot)_ |
-| Admin Dashboard | _(Add screenshot)_ |
-| Company Setup | _(Add screenshot)_ |
+| Home Page | ![Home](docs/screenshots/home.png) |
+| Job Listings | ![Jobs](docs/screenshots/jobs.png) |
+| Profile | ![Profile](docs/screenshots/profile.png) |
+| Admin Dashboard | ![Admin](docs/screenshots/admin.png) |
+
 
 ---
 
@@ -68,7 +69,7 @@
 ### ?? Authentication & Authorization
 - ? User Registration & Login
 - ? JWT-based Authentication (HTTP-only cookies)
-- ? Role-based access — **Student** and **Recruiter**
+- ? Role-based access ï¿½ **Student** and **Recruiter**
 - ? Protected Routes (admin panel restricted to recruiters)
 - ? Auto-redirect on login/logout
 
@@ -124,9 +125,9 @@
 ### Backend
 | Technology | Version | Purpose |
 |---|---|---|
-| Node.js | — | Runtime |
+| Node.js | ï¿½ | Runtime |
 | Express.js | 5 | Web Framework |
-| MongoDB | — | Database |
+| MongoDB | ï¿½ | Database |
 | Mongoose | 9 | ODM |
 | JWT | 9 | Authentication |
 | bcrypt | 6 | Password Hashing |
@@ -144,64 +145,64 @@
 ```
 job-search/
 +-- backend/
-¦   +-- controllers/
-¦   ¦   +-- application.controller.js
-¦   ¦   +-- company.controller.js
-¦   ¦   +-- job.controller.js
-¦   ¦   +-- user.controller.js
-¦   +-- middleware/
-¦   ¦   +-- isAuthenticated.js
-¦   ¦   +-- multer.js
-¦   +-- models/
-¦   ¦   +-- application.model.js
-¦   ¦   +-- company.model.js
-¦   ¦   +-- job.model.js
-¦   ¦   +-- user.model.js
-¦   +-- routes/
-¦   ¦   +-- application.route.js
-¦   ¦   +-- company.route.js
-¦   ¦   +-- job.route.js
-¦   ¦   +-- user.route.js
-¦   +-- utils/
-¦   ¦   +-- cloudinary.js
-¦   ¦   +-- datauri.js
-¦   ¦   +-- db.js
-¦   +-- .env
-¦   +-- index.js
-¦   +-- package.json
-¦
+ï¿½   +-- controllers/
+ï¿½   ï¿½   +-- application.controller.js
+ï¿½   ï¿½   +-- company.controller.js
+ï¿½   ï¿½   +-- job.controller.js
+ï¿½   ï¿½   +-- user.controller.js
+ï¿½   +-- middleware/
+ï¿½   ï¿½   +-- isAuthenticated.js
+ï¿½   ï¿½   +-- multer.js
+ï¿½   +-- models/
+ï¿½   ï¿½   +-- application.model.js
+ï¿½   ï¿½   +-- company.model.js
+ï¿½   ï¿½   +-- job.model.js
+ï¿½   ï¿½   +-- user.model.js
+ï¿½   +-- routes/
+ï¿½   ï¿½   +-- application.route.js
+ï¿½   ï¿½   +-- company.route.js
+ï¿½   ï¿½   +-- job.route.js
+ï¿½   ï¿½   +-- user.route.js
+ï¿½   +-- utils/
+ï¿½   ï¿½   +-- cloudinary.js
+ï¿½   ï¿½   +-- datauri.js
+ï¿½   ï¿½   +-- db.js
+ï¿½   +-- .env
+ï¿½   +-- index.js
+ï¿½   +-- package.json
+ï¿½
 +-- frontend/
     +-- src/
-    ¦   +-- admin/
-    ¦   ¦   +-- AdminJobs.jsx
-    ¦   ¦   +-- Applicants.jsx
-    ¦   ¦   +-- Companies.jsx
-    ¦   ¦   +-- CompanyCreate.jsx
-    ¦   ¦   +-- CompanySetup.jsx
-    ¦   ¦   +-- PostJob.jsx
-    ¦   ¦   +-- ProtectedRoute.jsx
-    ¦   +-- components/
-    ¦   ¦   +-- auth/
-    ¦   ¦   ¦   +-- Login.jsx
-    ¦   ¦   ¦   +-- Signup.jsx
-    ¦   ¦   +-- shared/Navbar.jsx
-    ¦   ¦   +-- ui/            (Shadcn components)
-    ¦   ¦   +-- Browse.jsx
-    ¦   ¦   +-- CategoryCarousel.jsx
-    ¦   ¦   +-- FilterCard.jsx
-    ¦   ¦   +-- HeroSection.jsx
-    ¦   ¦   +-- Home.jsx
-    ¦   ¦   +-- JobDescription.jsx
-    ¦   ¦   +-- Jobs.jsx
-    ¦   ¦   +-- Profile.jsx
-    ¦   ¦   +-- UpdateProfileDialogue.jsx
-    ¦   +-- hooks/
-    ¦   +-- redux/
-    ¦   +-- utils/
-    ¦   ¦   +-- constant.js
-    ¦   ¦   +-- cropImage.js
-    ¦   +-- App.jsx
-    ¦   +-- main.jsx
+    ï¿½   +-- admin/
+    ï¿½   ï¿½   +-- AdminJobs.jsx
+    ï¿½   ï¿½   +-- Applicants.jsx
+    ï¿½   ï¿½   +-- Companies.jsx
+    ï¿½   ï¿½   +-- CompanyCreate.jsx
+    ï¿½   ï¿½   +-- CompanySetup.jsx
+    ï¿½   ï¿½   +-- PostJob.jsx
+    ï¿½   ï¿½   +-- ProtectedRoute.jsx
+    ï¿½   +-- components/
+    ï¿½   ï¿½   +-- auth/
+    ï¿½   ï¿½   ï¿½   +-- Login.jsx
+    ï¿½   ï¿½   ï¿½   +-- Signup.jsx
+    ï¿½   ï¿½   +-- shared/Navbar.jsx
+    ï¿½   ï¿½   +-- ui/            (Shadcn components)
+    ï¿½   ï¿½   +-- Browse.jsx
+    ï¿½   ï¿½   +-- CategoryCarousel.jsx
+    ï¿½   ï¿½   +-- FilterCard.jsx
+    ï¿½   ï¿½   +-- HeroSection.jsx
+    ï¿½   ï¿½   +-- Home.jsx
+    ï¿½   ï¿½   +-- JobDescription.jsx
+    ï¿½   ï¿½   +-- Jobs.jsx
+    ï¿½   ï¿½   +-- Profile.jsx
+    ï¿½   ï¿½   +-- UpdateProfileDialogue.jsx
+    ï¿½   +-- hooks/
+    ï¿½   +-- redux/
+    ï¿½   +-- utils/
+    ï¿½   ï¿½   +-- constant.js
+    ï¿½   ï¿½   +-- cropImage.js
+    ï¿½   +-- App.jsx
+    ï¿½   +-- main.jsx
     +-- package.json
 ```
 
@@ -265,7 +266,7 @@ API_SECRET=your_cloudinary_api_secret
 
 Base: `http://localhost:4000/api/v1`
 
-### Users — `/api/v1/user`
+### Users ï¿½ `/api/v1/user`
 
 | Method | Endpoint | Auth | Purpose |
 |---|---|---|---|
@@ -274,7 +275,7 @@ Base: `http://localhost:4000/api/v1`
 | GET | `/logout` | ? | Logout, clear cookie |
 | POST | `/profile/update` | ? | Update profile, resume, photo |
 
-### Companies — `/api/v1/company`
+### Companies ï¿½ `/api/v1/company`
 
 | Method | Endpoint | Auth | Purpose |
 |---|---|---|---|
@@ -283,7 +284,7 @@ Base: `http://localhost:4000/api/v1`
 | GET | `/get/:id` | ? | Get company by ID |
 | PUT | `/update/:id` | ? | Update company + logo |
 
-### Jobs — `/api/v1/job`
+### Jobs ï¿½ `/api/v1/job`
 
 | Method | Endpoint | Auth | Purpose |
 |---|---|---|---|
@@ -292,7 +293,7 @@ Base: `http://localhost:4000/api/v1`
 | GET | `/getAdminJobs` | ? | Get recruiter's jobs |
 | GET | `/get/:id` | ? | Get job by ID |
 
-### Applications — `/api/v1/application`
+### Applications ï¿½ `/api/v1/application`
 
 | Method | Endpoint | Auth | Purpose |
 |---|---|---|---|
@@ -328,8 +329,8 @@ Base: `http://localhost:4000/api/v1`
 | Device | Layout |
 |---|---|
 | ?? Mobile `< 640px` | Single column, hamburger nav |
-| ?? Tablet `640–1024px` | 2-column grids |
-| ?? Laptop `1024–1280px` | Full layout |
+| ?? Tablet `640ï¿½1024px` | 2-column grids |
+| ?? Laptop `1024ï¿½1280px` | Full layout |
 | ??? Desktop `> 1280px` | Max-width centered |
 
 ---
@@ -378,7 +379,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:
 
 ## ?? License
 
-MIT License © 2024 Daksh Rajora
+MIT License ï¿½ 2024 Daksh Rajora
 
 ---
 
@@ -395,7 +396,7 @@ MIT License © 2024 Daksh Rajora
 
 ## ?? Acknowledgements
 
-[React](https://react.dev/) · [Vite](https://vitejs.dev/) · [Tailwind CSS](https://tailwindcss.com/) · [Shadcn/UI](https://ui.shadcn.com/) · [Redux Toolkit](https://redux-toolkit.js.org/) · [Framer Motion](https://www.framer.com/motion/) · [Cloudinary](https://cloudinary.com/) · [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) · [Sonner](https://sonner.emilkowal.ski/)
+[React](https://react.dev/) ï¿½ [Vite](https://vitejs.dev/) ï¿½ [Tailwind CSS](https://tailwindcss.com/) ï¿½ [Shadcn/UI](https://ui.shadcn.com/) ï¿½ [Redux Toolkit](https://redux-toolkit.js.org/) ï¿½ [Framer Motion](https://www.framer.com/motion/) ï¿½ [Cloudinary](https://cloudinary.com/) ï¿½ [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) ï¿½ [Sonner](https://sonner.emilkowal.ski/)
 
 ---
 

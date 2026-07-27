@@ -130,8 +130,6 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req,res) =>{
     try {
         const {fullname, email, phoneNumber, bio, skills} = req.body;
-        console.log("updateProfile body:", {fullname, email, phoneNumber, bio, skills});
-        console.log("updateProfile files:", req.files);
         
         const file = req.files?.['file']?.[0];
         const profilePhoto = req.files?.['profilePhoto']?.[0];
@@ -142,7 +140,6 @@ export const updateProfile = async (req,res) =>{
             cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
                 resource_type: "auto"
             });
-            console.log("Resume uploaded to Cloudinary:", cloudResponse.secure_url);
         }
 
         let profilePhotoCloudResponse;
@@ -151,15 +148,14 @@ export const updateProfile = async (req,res) =>{
             profilePhotoCloudResponse = await cloudinary.uploader.upload(fileUri.content, {
                 resource_type: "auto"
             });
-            console.log("Profile Photo uploaded to Cloudinary:", profilePhotoCloudResponse.secure_url);
         }
 
         let skillsArray;
         if (skills){
-          skillsArray = skills.split(",")
+          skillsArray = skills.split(",").map(s => s.trim()).filter(Boolean);
         }
-        const userId = req.id; //middleware se milega
-        
+
+        const userId = req.id;
         let user = await User.findById(userId);
 
         if (!user){
@@ -169,25 +165,39 @@ export const updateProfile = async (req,res) =>{
             })
         }
 
-        //updating data
+        // Null safety for profile subdocument
+        if (!user.profile) user.profile = {};
+
+        // Update basic fields
         if (fullname) user.fullname = fullname;
-        if (email) user.email = email;
-        if (phoneNumber) user.phoneNumber = phoneNumber;
+        if (phoneNumber) user.phoneNumber = Number(phoneNumber);
         if (skills) user.profile.skills = skillsArray;
         if (bio) user.profile.bio = bio;
 
-        //resume ayega
-        if(cloudResponse){
-            user.profile.resume = cloudResponse.secure_url;//saving in cloudinary
-            user.profile.resumeOriginalName = file.originalname;//saving original name of resume
+        // Only update email if it changed (avoid unnecessary unique index check)
+        if (email && email !== user.email) {
+            const emailExists = await User.findOne({ email, _id: { $ne: userId } });
+            if (emailExists) {
+                return res.status(400).json({
+                    message: "This email is already in use by another account.",
+                    success: false
+                });
+            }
+            user.email = email;
         }
 
-        //profilePhoto ayega
+        // Resume
+        if(cloudResponse){
+            user.profile.resume = cloudResponse.secure_url;
+            user.profile.resumeOriginalName = file.originalname;
+        }
+
+        // Profile photo
         if(profilePhotoCloudResponse){
             user.profile.profilePhoto = profilePhotoCloudResponse.secure_url;
         }
 
-        await user.save()
+        await user.save();
 
         user = {
             _id: user._id,
@@ -205,7 +215,14 @@ export const updateProfile = async (req,res) =>{
         })
 
     } catch (error) {
-        console.log(error);
+        console.log("updateProfile error:", error);
+        // Handle MongoDB duplicate key error
+        if (error.code === 11000) {
+            return res.status(400).json({
+                message: "Email already exists. Please use a different email.",
+                success: false
+            });
+        }
         return res.status(500).json({
             message: "Internal server error",
             success: false
