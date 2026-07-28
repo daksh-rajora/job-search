@@ -1,6 +1,5 @@
 import express from 'express'
 import cors from 'cors'
-import cookieParser from 'cookie-parser'
 import dotenv from "dotenv"
 import connectDB from './utils/db.js'
 import userRoute from './routes/user.route.js'
@@ -15,7 +14,6 @@ dotenv.config()
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser())
 const allowedOrigins = [
     "http://localhost:5173",
     process.env.FRONTEND_URL,
