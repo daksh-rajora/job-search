@@ -40,9 +40,11 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
       });
       if (res.data.success) {
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+        }
         dispatch(setUser(res.data.user));
         if (res.data.user.role === "recruiter") {
           navigate("/admin/companies");
