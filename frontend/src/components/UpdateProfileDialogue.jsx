@@ -83,8 +83,7 @@ const UpdateProfileDialogue = ({open,setOpen}) => {
         try {
             setLoading(true)
             const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
-                headers: { "content-type": "multipart/form-data" },
-                withCredentials: true
+                headers: { "content-type": "multipart/form-data" }
             })
             if (res.data.success) {
                 dispatch(setUser(res.data.user))
