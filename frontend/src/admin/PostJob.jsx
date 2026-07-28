@@ -61,8 +61,7 @@ const PostJob = () => {
         const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
             headers: {
                 "Content-Type": "application/json",
-            },
-            withCredentials: true
+            }
         });
         if (res.data.success) {
             toast.success(res.data.message);
